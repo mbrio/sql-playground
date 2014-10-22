@@ -1,0 +1,7 @@
+maxLogCount: 10
+maxConnectionTries: 10
+fileName: 'request.sql'
+logName: 'out.tsv'
+sql:
+  requestTimeout: 600000
+  stream: true
