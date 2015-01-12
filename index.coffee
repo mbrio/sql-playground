@@ -13,13 +13,13 @@ maxConnectionTries = config.maxConnectionTries ? 10
 fileName = config.fileName ? 'request.sql'
 logName = config.logName ? 'out.tsv'
 
-console.log config
-
 logExt = path.extname logName
 baseLogName = path.basename logName, logExt
 
+dataDir = path.join __dirname, 'data'
+
 filePath = path.join __dirname, fileName
-logPath = path.join __dirname, 'data', logName
+logPath = path.join dataDir, logName
 
 connectionTries = 0
 currentRequest = null
@@ -82,6 +82,8 @@ makeRequest = ->
       request.query fs.readFileSync(filePath).toString()
 
 sqlCommand = ->
+  fs.mkdirSync(dataDir) unless fs.existsSync dataDir
+
   logger.reset()
 
   makeRequest()
